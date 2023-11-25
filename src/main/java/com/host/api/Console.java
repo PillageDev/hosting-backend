@@ -8,7 +8,7 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint("api/v1/console")
+@ServerEndpoint("api/v1/console") //todo
 public class Console {
     private Session session;
     
@@ -28,7 +28,6 @@ public class Console {
         System.out.println("Closed!");
     }
 
-
     public void sendMessage(String message) {
         try {
             if (session != null && session.isOpen()) {
@@ -37,7 +36,7 @@ public class Console {
                 System.out.println("Session is null or closed!");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
     

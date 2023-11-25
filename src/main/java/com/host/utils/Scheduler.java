@@ -26,7 +26,11 @@ public class Scheduler {
 
     };
 
-    private void sendOutput(String containerId) {
+    public ScheduledExecutorService getScheduledExecutorService() {
+        return provider.getExecutorService();
+    }
+
+    public void sendOutput(String containerId) {
         LogContainerCmd logContainerCmd = App.getClient().logContainerCmd(containerId)
                 .withStdOut(true)
                 .withStdErr(true)

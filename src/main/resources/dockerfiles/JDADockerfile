@@ -2,33 +2,30 @@ FROM maven:latest
 
 WORKDIR /usr/src/app
 COPY . .
-ARG UPGRADE_LEVEL=0
+ENV UPGRADE_LEVEL=0
 
 RUN if [ "${UPGRADE_LEVEL}" = "0" ] ; then \
         echo "Setting up for UPGRADE_LEVEL 0..." && \
         export MIN_RAM="256m" && \
         export MAX_RAM="512m" && \
-        export MAX_NETWORK_BAND="100mbit" ; \
+        export MAX_NETWORK_BAND="400mbit" ; \
     elif [ "${UPGRADE_LEVEL}" = "1" ] ; then \
         echo "Setting up for UPGRADE_LEVEL 1..." && \
         export MIN_RAM="512m" && \
         export MAX_RAM="1024m" && \
-        export MAX_NETWORK_BAND="200mbit" ; \
+        export MAX_NETWORK_BAND="600mbit" ; \
     elif [ "${UPGRADE_LEVEL}" = "2" ] ; then \
         echo "Setting up for UPGRADE_LEVEL 2..." && \
         export MIN_RAM="512m" && \
         export MAX_RAM="1024m" && \
-        export MAX_NETWORK_BAND="350mbit" ; \
+        export MAX_NETWORK_BAND="800mbit" ; \
     else \
         echo "Invalid UPGRADE_LEVEL" ; \
     fi
 
-
 ENV JAR_NAME="jda-0.0.1-SNAPSHOT.jar"
 
-
 RUN tc qdisc add dev eth0 root tbf rate 1mbit burst 32kbit latency 400ms
-
 
 CMD ["java -Xms " + $MIN_RAM + " -Xmx " + $MAX_RAM + " -jar " + $JAR_NAME]
 

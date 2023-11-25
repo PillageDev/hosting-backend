@@ -4,19 +4,19 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.websocket.server.PathParam;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 
+import com.host.utils.Docker;
 import com.host.utils.Pocketbase;
 import com.host.utils.Pocketbase.User;
 
+import com.host.utils.Scheduler;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
+
+import java.util.concurrent.TimeUnit;
 
 @Path("api/v1/servers")
 public class Servers {
@@ -33,37 +33,55 @@ public class Servers {
     @Path("/create")
     @Consumes("application/json")
     @Produces("application/json")
-    public boolean createServer(String oathCode, Server server) {
+    public boolean createServer(String oathCode, Server server, User.Record user) {
         if (validOathCode(oathCode)) {
-            
-            
-            
-            return false;
+            String language = server.getLanguage();
+            int maxMemory = server.getMaxMemory();
+            int maxCPU = server.getMaxCPU();
+            boolean database = server.isDatabase();
+            int upgradeLevel = 0;
+            if (maxMemory == 716 && maxCPU == 716) {
+                upgradeLevel = 1;
+                if (database) {
+                    upgradeLevel = 2;
+                }
+            }
+            Docker.createServer(Docker.getContainerId("server-" + user.getDiscordId()), language, upgradeLevel);
+            return true;
         } else {
             return false;
         }
     }
 
-    @GET
+    @PUT
     @Path("/update/{id}")
     @Consumes("application/json")
     @Produces("application/json")
-    public boolean updateServer(@PathParam("id") String serverID, String oathCode, Server server) {
+    public boolean updateServer(@PathParam("id") String serverID, String oathCode, Server server, User.Record user) {
         if (validOathCode(oathCode)) {
-            //TODO: Update server  
-            return false;
-        } else {
-            return false;
+            String language = server.getLanguage();
+            int maxMemory = server.getMaxMemory();
+            int maxCPU = server.getMaxCPU();
+            boolean database = server.isDatabase();
+            int upgradeLevel = 0;
+            if (maxMemory == 716 && maxCPU == 716) {
+                upgradeLevel = 1;
+                if (database) {
+                    upgradeLevel = 2;
+                }
+            }
+            Docker.alterServerLevel(Docker.getContainerId("server-" + user.getDiscordId()), upgradeLevel);
         }
+        return false;
     }
 
-    @GET
+    @DELETE
     @Path("/delete/{id}")
     @Consumes("application/json")
     @Produces("application/json")
     public boolean deleteServer(@PathParam("id") String serverID, String oathCode) {
         if (validOathCode(oathCode)) {
-            //TODO: Delete server
+            Docker.deleteServer(Docker.getContainerId("server-" + serverID));
             return false;
         } else {
             return false;
@@ -76,11 +94,22 @@ public class Servers {
     @Produces("application/json")
     public Server getServer(@PathParam("id") String serverID, String oathCode) {
         if (validOathCode(oathCode)) {
-            //TODO: Get server
-            return null;
-        } else {
-            return null;
+            for (User user : Pocketbase.users) {
+                if (user.getRecord().getServer().getId().equals(serverID)) {
+                    return Server.builder()
+                        .serverName(user.getRecord().getServer().getServerName())
+                        .language(user.getRecord().getServer().getLanguage())
+                        .maxMemory(user.getRecord().getServer().getMaxMemory())
+                        .maxDisk(user.getRecord().getServer().getMaxDisk())
+                        .maxCPU(user.getRecord().getServer().getMaxCPU())
+                        .maxNetwork(user.getRecord().getServer().getMaxNetwork())
+                        .database(user.getRecord().getServer().isDatabase())
+                        .id(user.getRecord().getServer().getId())
+                        .build();
+                }
+            }
         }
+        return null;
     }
 
     @GET
@@ -90,7 +119,13 @@ public class Servers {
     public boolean startServer(@PathParam("id") String serverID, String jwtToken) {
         User user = Pocketbase.getUser(jwtToken);
         if (user == null) {
+            Scheduler scheduler = new Scheduler();
+            scheduler.getScheduledExecutorService().scheduleAtFixedRate(() -> {
+                String container = "server-" + serverID;
+                scheduler.sendOutput(container);
+            }, 0, 10, TimeUnit.SECONDS);
             return false;
+
         }
         if (!(serverID.equals(user.getRecord().getDiscordId()))) {
             return false;
@@ -106,6 +141,7 @@ public class Servers {
     public boolean stopServer(@PathParam("id") String serverID, String jwtToken) {
         User user = Pocketbase.getUser(jwtToken);
         if (user == null) {
+
             return false;
         }
         //TODO: Check jwt token against pocketbase and ensure permissions and stop server
@@ -150,10 +186,12 @@ public class Servers {
         private int maxCPU; // In %
         private int maxNetwork; // In MB/s
         private boolean database; // Whether or not to include a database
+        private String id;
 
         public JsonObject toJson() {
             JsonObjectBuilder json = Json.createObjectBuilder()
                 .add("serverName", serverName)
+                .add("id", id)
                 .add("language", language)
                 .add("maxMemory", maxMemory)
                 .add("maxDisk", maxDisk)

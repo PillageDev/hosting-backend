@@ -1,0 +1,111 @@
+2023-11-25T13:59:27,575-0500 [45211 1] com.newrelic INFO: Writing to New Relic log file: /Users/justin/hosting-backend/target/newrelic/logs/newrelic_agent.log
+2023-11-25T13:59:27,575-0500 [45211 1] com.newrelic INFO: JRE vendor Eclipse Adoptium version 21.0.1
+2023-11-25T13:59:27,575-0500 [45211 1] com.newrelic INFO: JVM vendor Eclipse Adoptium OpenJDK 64-Bit Server VM version 21.0.1+12-LTS
+2023-11-25T13:59:27,575-0500 [45211 1] com.newrelic INFO: OS Mac OS X version 14.0 arch aarch64
+2023-11-25T13:59:27,575-0500 [45211 1] com.newrelic INFO: Agent Host: Justins-MacBook-Air.local IP: 127.0.0.1
+2023-11-25T13:59:27,575-0500 [45211 1] com.newrelic INFO: New Relic Agent v8.7.0 is initializing...
+2023-11-25T13:59:28,088-0500 [45211 30] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2023-11-25T13:59:29,278-0500 [45211 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+2023-11-25T13:59:29,759-0500 [45211 1] com.newrelic INFO: Setting audit_mode to false
+2023-11-25T13:59:29,970-0500 [45211 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /Users/justin/hosting-backend/target/newrelic/./newrelic.yml
+2023-11-25T13:59:29,987-0500 [45211 1] com.newrelic INFO: New Relic Agent v8.7.0 has started
+2023-11-25T13:59:29,989-0500 [45211 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@18eed359
+2023-11-25T13:59:29,990-0500 [45211 1] com.newrelic INFO: Premain startup complete in 3,573ms
+2023-11-25T13:59:29,992-0500 [45211 1] com.newrelic WARN: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2023-11-25T13:59:30,016-0500 [45211 28] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2023-11-25T13:59:30,026-0500 [45211 28] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2023-11-25T14:00:24,776-0500 [45232 1] com.newrelic INFO: Writing to New Relic log file: /Users/justin/hosting-backend/target/newrelic/logs/newrelic_agent.log
+2023-11-25T14:00:24,777-0500 [45232 1] com.newrelic INFO: JRE vendor Eclipse Adoptium version 21.0.1
+2023-11-25T14:00:24,777-0500 [45232 1] com.newrelic INFO: JVM vendor Eclipse Adoptium OpenJDK 64-Bit Server VM version 21.0.1+12-LTS
+2023-11-25T14:00:24,777-0500 [45232 1] com.newrelic INFO: OS Mac OS X version 14.0 arch aarch64
+2023-11-25T14:00:24,777-0500 [45232 1] com.newrelic INFO: Agent Host: Justins-MacBook-Air.local IP: 127.0.0.1
+2023-11-25T14:00:24,777-0500 [45232 1] com.newrelic INFO: New Relic Agent v8.7.0 is initializing...
+2023-11-25T14:00:25,363-0500 [45232 30] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2023-11-25T14:00:27,490-0500 [45232 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+2023-11-25T14:00:28,084-0500 [45232 1] com.newrelic INFO: Setting audit_mode to false
+2023-11-25T14:00:28,359-0500 [45232 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /Users/justin/hosting-backend/target/newrelic/./newrelic.yml
+2023-11-25T14:00:28,374-0500 [45232 1] com.newrelic INFO: New Relic Agent v8.7.0 has started
+2023-11-25T14:00:28,374-0500 [45232 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@18eed359
+2023-11-25T14:00:28,375-0500 [45232 1] com.newrelic INFO: Premain startup complete in 4,549ms
+2023-11-25T14:00:28,378-0500 [45232 1] com.newrelic WARN: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2023-11-25T14:00:28,388-0500 [45232 28] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2023-11-25T14:00:28,394-0500 [45232 28] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2023-11-25T14:04:20,371-0500 [45345 1] com.newrelic INFO: Writing to New Relic log file: /Users/justin/hosting-backend/target/newrelic/logs/newrelic_agent.log
+2023-11-25T14:04:20,371-0500 [45345 1] com.newrelic INFO: JRE vendor Eclipse Adoptium version 21.0.1
+2023-11-25T14:04:20,372-0500 [45345 1] com.newrelic INFO: JVM vendor Eclipse Adoptium OpenJDK 64-Bit Server VM version 21.0.1+12-LTS
+2023-11-25T14:04:20,372-0500 [45345 1] com.newrelic INFO: OS Mac OS X version 14.0 arch aarch64
+2023-11-25T14:04:20,372-0500 [45345 1] com.newrelic INFO: Agent Host: Justins-MacBook-Air.local IP: 127.0.0.1
+2023-11-25T14:04:20,372-0500 [45345 1] com.newrelic INFO: New Relic Agent v8.7.0 is initializing...
+2023-11-25T14:04:20,941-0500 [45345 30] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2023-11-25T14:04:22,030-0500 [45345 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+2023-11-25T14:04:22,493-0500 [45345 1] com.newrelic INFO: Setting audit_mode to false
+2023-11-25T14:04:22,718-0500 [45345 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /Users/justin/hosting-backend/target/newrelic/./newrelic.yml
+2023-11-25T14:04:22,732-0500 [45345 1] com.newrelic INFO: New Relic Agent v8.7.0 has started
+2023-11-25T14:04:22,733-0500 [45345 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@210366b4
+2023-11-25T14:04:22,734-0500 [45345 1] com.newrelic INFO: Premain startup complete in 3,464ms
+2023-11-25T14:04:22,736-0500 [45345 1] com.newrelic WARN: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2023-11-25T14:04:22,748-0500 [45345 28] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2023-11-25T14:04:22,750-0500 [45345 28] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2023-11-25T14:16:35,745-0500 [45705 1] com.newrelic INFO: Writing to New Relic log file: /Users/justin/hosting-backend/target/newrelic/logs/newrelic_agent.log
+2023-11-25T14:16:35,746-0500 [45705 1] com.newrelic INFO: JRE vendor Eclipse Adoptium version 21.0.1
+2023-11-25T14:16:35,746-0500 [45705 1] com.newrelic INFO: JVM vendor Eclipse Adoptium OpenJDK 64-Bit Server VM version 21.0.1+12-LTS
+2023-11-25T14:16:35,746-0500 [45705 1] com.newrelic INFO: OS Mac OS X version 14.0 arch aarch64
+2023-11-25T14:16:35,746-0500 [45705 1] com.newrelic INFO: Agent Host: Justins-MacBook-Air.local IP: 127.0.0.1
+2023-11-25T14:16:35,746-0500 [45705 1] com.newrelic INFO: New Relic Agent v8.7.0 is initializing...
+2023-11-25T14:16:36,553-0500 [45705 30] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2023-11-25T14:16:38,172-0500 [45705 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+2023-11-25T14:16:38,685-0500 [45705 1] com.newrelic INFO: Setting audit_mode to false
+2023-11-25T14:16:39,066-0500 [45705 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /Users/justin/hosting-backend/target/newrelic/./newrelic.yml
+2023-11-25T14:16:39,072-0500 [45705 1] com.newrelic INFO: New Relic Agent v8.7.0 has started
+2023-11-25T14:16:39,072-0500 [45705 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@210366b4
+2023-11-25T14:16:39,072-0500 [45705 1] com.newrelic INFO: Premain startup complete in 4,369ms
+2023-11-25T14:16:39,074-0500 [45705 1] com.newrelic WARN: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2023-11-25T14:16:39,101-0500 [45705 28] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2023-11-25T14:16:39,105-0500 [45705 28] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2023-11-25T14:23:36,792-0500 [45981 1] com.newrelic INFO: Writing to New Relic log file: /Users/justin/hosting-backend/target/newrelic/logs/newrelic_agent.log
+2023-11-25T14:23:36,793-0500 [45981 1] com.newrelic INFO: JRE vendor Eclipse Adoptium version 21.0.1
+2023-11-25T14:23:36,793-0500 [45981 1] com.newrelic INFO: JVM vendor Eclipse Adoptium OpenJDK 64-Bit Server VM version 21.0.1+12-LTS
+2023-11-25T14:23:36,793-0500 [45981 1] com.newrelic INFO: OS Mac OS X version 14.0 arch aarch64
+2023-11-25T14:23:36,793-0500 [45981 1] com.newrelic INFO: Agent Host: Justins-MacBook-Air.local IP: 127.0.0.1
+2023-11-25T14:23:36,793-0500 [45981 1] com.newrelic INFO: New Relic Agent v8.7.0 is initializing...
+2023-11-25T14:23:37,406-0500 [45981 30] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2023-11-25T14:23:38,697-0500 [45981 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+2023-11-25T14:23:39,119-0500 [45981 1] com.newrelic INFO: Setting audit_mode to false
+2023-11-25T14:23:39,336-0500 [45981 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /Users/justin/hosting-backend/target/newrelic/./newrelic.yml
+2023-11-25T14:23:39,346-0500 [45981 1] com.newrelic INFO: New Relic Agent v8.7.0 has started
+2023-11-25T14:23:39,347-0500 [45981 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@210366b4
+2023-11-25T14:23:39,347-0500 [45981 1] com.newrelic INFO: Premain startup complete in 3,709ms
+2023-11-25T14:23:39,350-0500 [45981 1] com.newrelic WARN: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2023-11-25T14:23:39,381-0500 [45981 28] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2023-11-25T14:23:39,386-0500 [45981 28] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2023-11-25T14:24:02,367-0500 [45999 1] com.newrelic INFO: Writing to New Relic log file: /Users/justin/hosting-backend/target/newrelic/logs/newrelic_agent.log
+2023-11-25T14:24:02,367-0500 [45999 1] com.newrelic INFO: JRE vendor Eclipse Adoptium version 21.0.1
+2023-11-25T14:24:02,367-0500 [45999 1] com.newrelic INFO: JVM vendor Eclipse Adoptium OpenJDK 64-Bit Server VM version 21.0.1+12-LTS
+2023-11-25T14:24:02,367-0500 [45999 1] com.newrelic INFO: OS Mac OS X version 14.0 arch aarch64
+2023-11-25T14:24:02,367-0500 [45999 1] com.newrelic INFO: Agent Host: Justins-MacBook-Air.local IP: 127.0.0.1
+2023-11-25T14:24:02,367-0500 [45999 1] com.newrelic INFO: New Relic Agent v8.7.0 is initializing...
+2023-11-25T14:24:02,861-0500 [45999 30] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2023-11-25T14:24:04,003-0500 [45999 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+2023-11-25T14:24:04,463-0500 [45999 1] com.newrelic INFO: Setting audit_mode to false
+2023-11-25T14:24:04,718-0500 [45999 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /Users/justin/hosting-backend/target/newrelic/./newrelic.yml
+2023-11-25T14:24:04,780-0500 [45999 1] com.newrelic INFO: New Relic Agent v8.7.0 has started
+2023-11-25T14:24:04,781-0500 [45999 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@18eed359
+2023-11-25T14:24:04,781-0500 [45999 1] com.newrelic INFO: Premain startup complete in 3,278ms
+2023-11-25T14:24:04,786-0500 [45999 1] com.newrelic WARN: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2023-11-25T14:24:09,770-0500 [45999 54] com.newrelic INFO: Host name is Justins-MacBook-Air.local, display host Justins-MacBook-Air.local for application Backend
+2023-11-25T14:24:09,771-0500 [45999 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2023-11-25T14:24:10,392-0500 [45999 54] com.newrelic INFO: Collector redirection to collector.newrelic.com:443
+2023-11-25T14:24:10,657-0500 [45999 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2023-11-25T14:24:10,657-0500 [45999 54] com.newrelic INFO: Agent run id: BUscQi3jNz1oAEDsOVeynjFlYkpIAAIBAAAnIQEAALOvAgRXsqfNAwAFOC43LjAAGUp1c3RpbnMtTWFjQm9vay1BaXIubG9jYWwAB0JhY2tlbmQ
+2023-11-25T14:24:10,658-0500 [45999 54] com.newrelic INFO: Agent 45999@Justins-MacBook-Air.local/Backend connected to collector.newrelic.com:443
+2023-11-25T14:24:10,658-0500 [45999 54] com.newrelic INFO: Reporting to: https://rpm.newrelic.com/accounts/4254777/applications/1471326157
+2023-11-25T14:24:10,660-0500 [45999 54] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2023-11-25T14:24:10,661-0500 [45999 54] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2023-11-25T14:24:10,661-0500 [45999 54] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2023-11-25T14:24:10,665-0500 [45999 54] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2023-11-25T14:24:10,666-0500 [45999 54] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2023-11-25T14:24:10,666-0500 [45999 54] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2023-11-25T14:24:10,785-0500 [45999 54] com.newrelic INFO: Real user monitoring is enabled for application Backend. Auto instrumentation is enabled.
+2023-11-25T14:24:10,788-0500 [45999 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2023-11-25T14:53:38,766-0500 [45999 28] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2023-11-25T14:53:38,921-0500 [45999 28] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown

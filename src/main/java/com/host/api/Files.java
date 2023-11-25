@@ -28,7 +28,7 @@ public class Files {
     @Path("/getDir")
     @Consumes("application/json")
     @Produces("application/json")
-    public Map<String, String> getDir(@HeaderParam("token") String token, String id, String dir) {
+    public Map<String, String> getDir(@HeaderParam("AUTHORIZATION") String token, String id, String dir) {
         User user = Pocketbase.getUser(token);
         if (user == null) {
             return null;
@@ -49,6 +49,7 @@ public class Files {
             Map<String, String> files = new HashMap<>();
             File file = new File(workingDir + dir);
             File[] filesInDir = file.listFiles();
+            assert filesInDir != null;
             for (File f : filesInDir) {
                 String name = f.getName();
                 String type = f.isDirectory() ? "dir" : getFileExtension(name);
@@ -78,7 +79,7 @@ public class Files {
      * @param path The path to the file, including the file name and extension
      * @return A map of the file's contents, with the key being the line number and the value being the line's contents
      */
-    public Map<String, String> getContents(@HeaderParam("token") String token, String id, String path) {
+    public Map<String, String> getContents(@HeaderParam("AUTHORIZATION") String token, String id, String path) {
         User user = Pocketbase.getUser(token);
         if (user == null) {
             return null;
@@ -89,7 +90,7 @@ public class Files {
             ExecStartCmd start = client.execStartCmd(command.getId());
             ExecStartResultCallback callback = new ExecStartResultCallback();
             start.exec(callback);
-            String workingDir = "";
+            String workingDir;
             try {
                 workingDir = callback.awaitCompletion().toString();
             } catch (InterruptedException e) {
@@ -107,7 +108,7 @@ public class Files {
                     lineNumber++;
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
 
             return files;

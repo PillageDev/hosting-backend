@@ -15,5 +15,19 @@ RUN npm install
 # Copy the rest of the application code to the working directory
 COPY . .
 
+# MAKE SURE TO SET THIS ENVIRONMENT VARIABLE BASED ON THE UPGRADE LEVEL
+ENV UPGRADE_LEVEL=0
+RUN IF [ "${UPGRADE_LEVEL}" = "1" ] ; then \
+        export NETWORK_BAND="400mbit" ; \
+    elif [ "${UPGRADE_LEVEL}" = "2" ] ; then \
+        export NETWORK_BAND="600mbit" ; \
+    elif [ "${UPGRADE_LEVEL}" = "3" ] ; then \
+        export NETWORK_BAND="800mbit" ; \
+
+
 # Define the command to run the bot
 CMD ["node", $START_FILE]
+
+RUN apt-get update && apt-get install -y iproute2
+
+CMD ["sh", "-c", "tc qdisc add dev eth0 root tbf rate $NETWORK_BAND burst 32kbit latency 400ms && node $START_FILE"]

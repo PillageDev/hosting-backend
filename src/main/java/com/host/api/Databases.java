@@ -20,9 +20,9 @@ import lombok.Setter;
 
 @Path("api/v1/databases")
 public class Databases {
-    private final String JDBC_URL = "jdbc:mysql://localhost:3306/"; //TODO: Change to machine root ip
+    private final String JDBC_URL = "jdbc:mysql://host_user-db:3306/host";
     private final String USERNAME = "root";
-    private final String PASSWORD = "password"; //TODO: Change
+    private final String PASSWORD = "965c0dc0fa5074061287";
     private final Connection connection;
 
     public Databases() {
@@ -37,12 +37,12 @@ public class Databases {
     @Path("/create")
     @Consumes("application/json")
     @Produces("application/json")
-    public Map<String, String> createDatabase(@HeaderParam("token") String token, String id, String name, String connections) {
+    public Map<String, String> createDatabase(@HeaderParam("AUTHORIZATION") String token, String id, String name, String connections) {
         try {
             Statement statement = connection.createStatement();
             String sql = "CREATE DATABASE " + id + "_" + name;
             statement.executeUpdate(sql);
-            
+
             String dbUser = "user_" + id;
             String dbPassword = genPassword();
             String createUser = "CREATE USER '" + dbUser + "'@'%' IDENTIFIED BY '" + dbPassword + "'";
@@ -52,6 +52,7 @@ public class Databases {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return null;
     }
 
     private String genPassword() {

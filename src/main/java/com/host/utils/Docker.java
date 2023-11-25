@@ -58,7 +58,7 @@ public class Docker {
                 throw new IllegalArgumentException("Invalid language!");
         }
 
-        BuildImageCmd buildImageCmd = App.getClient().buildImageCmd(new Files(dockerFile));
+        BuildImageCmd buildImageCmd = App.getClient().buildImageCmd(new File(dockerFile));
             buildImageCmd.withTag("server-" + containerId);
             buildImageCmd.exec(new BuildImageResultCallback() {
                 @Override
@@ -72,18 +72,18 @@ public class Docker {
         String containerIdentifier = "server-" + containerId;
         long memory;
         int cpuShares;
-        String storage = "";
+        String storage;
         if (upgradeLevel == 0) {
             memory = 512 * 1024 * 1024; // 512 MB
-            cpuShares = (int) 0.5 * 1024; // 50% cpu
+            cpuShares = 512; // 50% cpu
             storage = "5g"; // 5 GB storage
         } if (upgradeLevel == 1 || upgradeLevel == 2) {
             memory = 1024 * 1024 * 1024; // 1 GB
-            cpuShares = (int) 0.75 * 1024; // 75% cpu
+            cpuShares = 768; // 75% cpu
             storage = "10g"; // 10 GB storage
         } else {
             memory = 512 * 1024 * 1024; // 512 MB
-            cpuShares = (int) 0.5 * 1024; // 50% cpu
+            cpuShares = 512; // 50% cpu
             storage = "5g"; // 5 GB storage
         }   
         final String storageFinal = storage;
@@ -149,5 +149,11 @@ public class Docker {
                 .withNameFilter(Collections.singletonList(containerName))
                 .exec().get(0).getId();
         return containerId;
+    }
+
+    public static void deleteServer(String containerId) {
+        String containerIdentifier = "server-" + containerId;
+        String dockerContainerId = getContainerId(containerIdentifier);
+        App.getClient().removeContainerCmd(dockerContainerId).exec();
     }
 }

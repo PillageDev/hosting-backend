@@ -8,11 +8,7 @@ import java.util.Map;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -35,11 +31,7 @@ public class Pocketbase {
     private static final String BASE_URL = "https://host-pocketbase.nepahq.easypanel.host";
 
     public static User getUser(String token) {
-        if (tokens.containsKey(token)) {
-            return tokens.get(token);
-        } else {
-            return null;
-        }
+        return tokens.getOrDefault(token, null);
     }
 
     @GET
@@ -68,7 +60,8 @@ public class Pocketbase {
                 .discordAvatarUrl(response.getJsonObject("record").getString("discordAvatarUrl"))
                 .discordId(response.getJsonObject("record").getString("discordId"))
                 .server(Server.builder()
-                    .serverName(response.getJsonObject("record").getJsonObject("server").getString("id"))
+                    .serverName(response.getJsonObject("record").getJsonObject("server").getString("serverName"))
+                    .id(response.getJsonObject("record").getJsonObject("server").getString("id"))
                     .language(response.getJsonObject("record").getJsonObject("server").getString("language"))
                     .maxMemory(response.getJsonObject("record").getJsonObject("server").getInt("maxMemory"))
                     .maxDisk(response.getJsonObject("record").getJsonObject("server").getInt("maxDisk"))
@@ -114,7 +107,8 @@ public class Pocketbase {
                 .discordAvatarUrl(response.getJsonObject("record").getString("discordAvatarUrl"))
                 .discordId(response.getJsonObject("record").getString("discordId"))
                 .server(Server.builder()
-                    .serverName(response.getJsonObject("record").getJsonObject("server").getString("id"))
+                    .serverName(response.getJsonObject("record").getJsonObject("server").getString("serverName"))
+                    .id(response.getJsonObject("record").getJsonObject("server").getString("id"))
                     .language(response.getJsonObject("record").getJsonObject("server").getString("language"))
                     .maxMemory(response.getJsonObject("record").getJsonObject("server").getInt("maxMemory"))
                     .maxDisk(response.getJsonObject("record").getJsonObject("server").getInt("maxDisk"))
@@ -240,7 +234,8 @@ public class Pocketbase {
             .discordAvatarUrl(response.getString("discordAvatarUrl"))
             .discordId(response.getString("discordId"))
             .server(Server.builder()
-                .serverName(response.getJsonObject("server").getString("id"))
+                .serverName(response.getJsonObject("server").getString("serverName"))
+                .id(response.getJsonObject("server").getString("id"))
                 .language(response.getJsonObject("server").getString("language"))
                 .maxMemory(response.getJsonObject("server").getInt("maxMemory"))
                 .maxDisk(response.getJsonObject("server").getInt("maxDisk"))
@@ -255,7 +250,7 @@ public class Pocketbase {
     @Path("/api/v1/users/update/{id}")
     @Consumes("application/json")
     @Produces("application/json")
-    public static User.Record update(String token, @HeaderParam("id") String id, String username, String email, String password, String discordAvatarUrl, String discordId, Servers.Server server) {
+    public static User.Record update(String token, @PathParam("id") String id, String username, String email, String password, String discordAvatarUrl, String discordId, Servers.Server server) {
         WebTarget target = CLIENT.target(BASE_URL + "/api/collections/users/records/" + id);
         String payload = "";
         if (server == null) {
@@ -280,7 +275,8 @@ public class Pocketbase {
             .discordAvatarUrl(response.getString("discordAvatarUrl"))
             .discordId(response.getString("discordId"))
             .server(Server.builder()
-                .serverName(response.getJsonObject("server").getString("id"))
+                .serverName(response.getJsonObject("server").getString("serverName"))
+                .id(response.getJsonObject("server").getString("id"))
                 .language(response.getJsonObject("server").getString("language"))
                 .maxMemory(response.getJsonObject("server").getInt("maxMemory"))
                 .maxDisk(response.getJsonObject("server").getInt("maxDisk"))
@@ -295,7 +291,7 @@ public class Pocketbase {
     @Path("/api/v1/users/delete/{id}")
     @Consumes("application/json")
     @Produces("application/json")
-    public static boolean delete(String token, @HeaderParam("id") String id) {
+    public static boolean delete(String token, @PathParam("id") String id) {
         WebTarget target = CLIENT.target(BASE_URL + "/api/collections/users/records/" + id);
         JsonObject response = target.request().delete(JsonObject.class);
         if (response == null) {
@@ -309,7 +305,7 @@ public class Pocketbase {
     @Path("/api/v1/users/get/{id}")
     @Consumes("application/json")
     @Produces("application/json")
-    public static User.Record get(@HeaderParam("id") String id) {
+    public static User.Record get(@PathParam("id") String id) {
         WebTarget target = CLIENT.target(BASE_URL + "/api/collections/users/records/" + id);
         JsonObject response = target.request().get(JsonObject.class);
         if (response.containsKey("code")) {
@@ -328,7 +324,8 @@ public class Pocketbase {
             .discordAvatarUrl(response.getString("discordAvatarUrl"))
             .discordId(response.getString("discordId"))
             .server(Server.builder()
-                .serverName(response.getJsonObject("server").getString("id"))
+                .serverName(response.getJsonObject("server").getString("serverName"))
+                .id(response.getJsonObject("server").getString("id"))
                 .language(response.getJsonObject("server").getString("language"))
                 .maxMemory(response.getJsonObject("server").getInt("maxMemory"))
                 .maxDisk(response.getJsonObject("server").getInt("maxDisk"))

@@ -14,7 +14,7 @@ public class Oath2 {
     @Path("/token/request")
     @Consumes("application/json")
     @Produces("application/json")
-    public String getOathCode(@PathParam("client_id") String clientID, @PathParam("client_secret") String clientSecret) {
+    public String getOathCode(String clientID, String clientSecret) {
         String authToken = System.getenv("AUTH_TOKEN");
         String validClientID = System.getenv("CLIENT_ID");
         String validClientSecret = System.getenv("CLIENT_SECRET");
