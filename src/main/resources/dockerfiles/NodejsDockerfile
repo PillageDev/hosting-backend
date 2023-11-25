@@ -1,0 +1,19 @@
+# Use an official Node.js runtime as a base image
+FROM node:latest
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+ENV START_FILE="bot.js"
+
+# Install the bot dependencies
+RUN npm install
+
+# Copy the rest of the application code to the working directory
+COPY . .
+
+# Define the command to run the bot
+CMD ["node", $START_FILE]

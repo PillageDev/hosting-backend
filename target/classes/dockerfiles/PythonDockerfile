@@ -1,0 +1,30 @@
+# Use an official Python runtime as a base image
+FROM python:latest
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+ENV REQUIREMENTS_FILE="requirements.txt"
+ENV START_FILE="main.py"
+ENV MAX_NETWORK_BAND="1mbit"
+ENV MAX_CPU_USAGE="50"
+ENV MAX_DISK_USAGE="5"
+
+# Copy requirement file into working directory
+COPY $REQUIREMENTS_FILE ./
+
+
+# Install the bot dependencies
+RUN pip install -r $REQUIREMENTS_FILE
+
+# Copy the rest of the application code to the working directory
+COPY . .
+
+# Define the command to run the bot
+CMD ["python3", $START_FILE]
+
+RUN tc qdisc add dev eth0 root tbf rate $MAX_NETWORK_BAND burst 32kbit latency 400ms && \
+    cpulimit -l $MAX_CPU_USAGE -e java && \
+    df -h | awk '$NF=="/"{printf "%s", $5}' | sed 's/%//' | awk '$1 > $MAX_DISK_USAGE {print "Disk usage is too high"}'
+
+
