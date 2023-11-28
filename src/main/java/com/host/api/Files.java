@@ -19,8 +19,7 @@ import com.github.dockerjava.api.command.ExecStartCmd;
 import com.github.dockerjava.core.command.ExecStartResultCallback;
 import com.host.App;
 import com.host.utils.Docker;
-import com.host.utils.Pocketbase;
-import com.host.utils.Pocketbase.User;
+import com.host.api.Users.User;
 
 @Path("api/v1/file")
 public class Files {
@@ -29,7 +28,7 @@ public class Files {
     @Consumes("application/json")
     @Produces("application/json")
     public Map<String, String> getDir(@HeaderParam("AUTHORIZATION") String token, String id, String dir) {
-        User user = Pocketbase.getUser(token);
+        User user = Users.getUser(token);
         if (user == null) {
             return null;
         } else {
@@ -80,7 +79,7 @@ public class Files {
      * @return A map of the file's contents, with the key being the line number and the value being the line's contents
      */
     public Map<String, String> getContents(@HeaderParam("AUTHORIZATION") String token, String id, String path) {
-        User user = Pocketbase.getUser(token);
+        User user = Users.getUser(token);
         if (user == null) {
             return null;
         } else {

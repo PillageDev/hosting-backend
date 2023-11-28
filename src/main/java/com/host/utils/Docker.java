@@ -41,7 +41,7 @@ public class Docker {
         App.getClient().stopContainerCmd(containerDockerId).exec();
     }
 
-    public static void createServer(String containerId, String lang, int upgradeLevel) {
+    public static void createServer(String containerId, String lang, int maxMemory, int maxCpu, int maxDisk, int maxBandwidth) {
         String dockerFile = "dockerfiles/";
         
         switch (lang) {
@@ -70,28 +70,12 @@ public class Docker {
             }).awaitImageId();
         
         String containerIdentifier = "server-" + containerId;
-        long memory;
-        int cpuShares;
-        String storage;
-        if (upgradeLevel == 0) {
-            memory = 512 * 1024 * 1024; // 512 MB
-            cpuShares = 512; // 50% cpu
-            storage = "5g"; // 5 GB storage
-        } if (upgradeLevel == 1 || upgradeLevel == 2) {
-            memory = 1024 * 1024 * 1024; // 1 GB
-            cpuShares = 768; // 75% cpu
-            storage = "10g"; // 10 GB storage
-        } else {
-            memory = 512 * 1024 * 1024; // 512 MB
-            cpuShares = 512; // 50% cpu
-            storage = "5g"; // 5 GB storage
-        }   
-        final String storageFinal = storage;
+        final String storageFinal = maxDisk + "gb";
         HostConfig hostConfig = HostConfig.newHostConfig()
-                .withCpuShares(cpuShares) // % cpu  
+                .withCpuShares(maxCpu) // % cpu
                 .withCpuPeriod((long) 100000) // 100000 microseconds (100 milliseconds) of CPU time
                 .withCpuQuota((long) 50000) // 50000 microseconds (50 milliseconds) of CPU time
-                .withMemory(memory)
+                .withMemory((long) maxMemory)
                 .withMemorySwap((long) 512 * 1024 * 1024) // 512 MB (Swap)
                 .withStorageOpt(new HashMap<String, String>() {
                     {
@@ -102,23 +86,45 @@ public class Docker {
         App.getClient().createContainerCmd("server-" + containerId)
                 .withName(containerIdentifier)
                 .withHostConfig(hostConfig)
-                .withEnv("UPGRADE_LEVEL=" + upgradeLevel)
+                .withEnv("MAX_BANDWIDTH=" + maxBandwidth)
                 .exec().getId();
     }
 
-    public static void alterServerLevel(String containerId, int upgradeLevel) {
+    public static void changeServerResources(String containerId, int maxMemory, int maxCpu, int maxDisk, int maxBandwidth, String language) {
         Bind[] volumeMounts = App.getClient().inspectContainerCmd(containerId)
             .exec()
             .getHostConfig()
             .getBinds();
 
-        String image = App.getClient().inspectContainerCmd(containerId).exec().getImageId();
+        String dockerFile = "dockerfiles/";
+        if (language.equals("java")) {
+            dockerFile += "JDADockerfile";
+        } else if (language.equals("python")) {
+            dockerFile += "NodejsDockerfile";
+        } else if (language.equals("javascript")) {
+            dockerFile += "PythonDockerfile";
+        } else {
+            throw new IllegalArgumentException("Invalid language!");
+        }
 
-        String upgradeLevelEnv = "UPGRADE_LEVEL=" + upgradeLevel;
+        String upgradeLevelEnv = "MAX_BANDWIDTH=" + maxBandwidth;
 
-        App.getClient().createContainerCmd(image)
+        HostConfig hostConfig = HostConfig.newHostConfig()
+            .withCpuShares(maxCpu) // % cpu
+            .withCpuPeriod((long) 100000) // 100000 microseconds (100 milliseconds) of CPU time
+            .withCpuQuota((long) 50000) // 50000 microseconds (50 milliseconds) of CPU time
+            .withMemory((long) maxMemory)
+            .withMemorySwap((long) 512 * 1024 * 1024) // 512 MB (Swap)
+            .withStorageOpt(new HashMap<String, String>() {
+                {
+                    put("size", maxDisk + "gb"); // 5 GB storage
+                }
+            });
+
+        App.getClient().createContainerCmd(containerId)
             .withBinds(volumeMounts)
             .withEnv(upgradeLevelEnv)
+            .withHostConfig(hostConfig)
             .exec()
             .getId();
     }

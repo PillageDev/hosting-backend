@@ -8,7 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-@Path("api/v1/oath2")
+@Path("api/v1/oauth2")
 public class Oath2 {
     @GET
     @Path("/token/request")
